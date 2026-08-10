@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santiago Valenti — Full Stack Developer</title>
+  <meta name="description"
+    content="Portfolio de Santiago Valenti, Full Stack Developer especializado en Java, Spring Boot, APIs REST, MySQL y desarrollo de sistemas web." />
+  <link rel="canonical" href="https://santiago-valenti.netlify.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Santiago Valenti — Full Stack Developer" />
+  <meta property="og:description"
+    content="Desarrollo de aplicaciones y sistemas web con Java, Spring Boot, APIs REST, MySQL e integraciones." />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta property="og:url" content="https://santiago-valenti.netlify.app/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Santiago Valenti — Full Stack Developer" />
+  <meta name="twitter:description"
+    content="Full Stack Developer orientado a sistemas web reales, backend Java/Spring Boot e interfaces claras." />
+  <meta name="twitter:image" content="/og-image.jpg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+
+<body data-page="home">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header" aria-label="Navegación principal">
+    <nav class="command-nav" aria-label="Secciones del portfolio">
+      <a class="brand-chip" href="#home" aria-label="Ir al inicio">
+        <span class="brand-mark">SV</span>
+        <span data-site-name>Santiago Valenti</span>
+      </a>
+      <div class="command-links">
+        <a class="nav-link" href="#home" data-section-link="home">Inicio</a>
+        <a class="nav-link" href="#about" data-section-link="about">Sobre mí</a>
+        <a class="nav-link" href="#projects" data-section-link="projects">Proyectos</a>
+        <a class="nav-link" href="#education" data-section-link="education">Estudios</a>
+        <a class="nav-link" href="#technologies" data-section-link="technologies">Tecnologías</a>
+        <a class="nav-link" href="#contact" data-section-link="contact">Contacto</a>
+      </div>
+      <a class="nav-cv" href="/cv.pdf" data-cv-link download>
+        <i data-lucide="file-down" aria-hidden="true"></i>
+        <span>Descargar CV</span>
+      </a>
+    </nav>
+
+    <button class="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu"
+      data-mobile-toggle>
+      <i data-lucide="menu" aria-hidden="true"></i>
+      <span>Menú</span>
+    </button>
+
+    <nav class="mobile-dock" aria-label="Navegación móvil">
+      <a class="dock-link" href="#home" data-section-link="home" aria-label="Inicio">
+        <i data-lucide="home" aria-hidden="true"></i>
+        <span>Inicio</span>
+      </a>
+      <a class="dock-link" href="#projects" data-section-link="projects" aria-label="Proyectos">
+        <i data-lucide="layers-3" aria-hidden="true"></i>
+        <span>Proyectos</span>
+      </a>
+      <a class="dock-link" href="#technologies" data-section-link="technologies" aria-label="Tecnologías">
+        <i data-lucide="cpu" aria-hidden="true"></i>
+        <span>Stack</span>
+      </a>
+      <a class="dock-link" href="#contact" data-section-link="contact" aria-label="Contacto">
+        <i data-lucide="mail" aria-hidden="true"></i>
+        <span>Contacto</span>
+      </a>
+      <a class="dock-link" href="/cv.pdf" data-cv-link download aria-label="Descargar CV">
+        <i data-lucide="download" aria-hidden="true"></i>
+        <span>CV</span>
+      </a>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+      <a href="#about">Sobre mí</a>
+      <a href="#education">Estudios</a>
+      <a href="#technologies">Tecnologías</a>
+      <a href="/proyectos.html">Todos los proyectos</a>
+      <a href="/cv.pdf" data-cv-link download>Descargar CV</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero section-block" id="home" data-section>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="section-kicker reveal">
+            <span>[01]</span>
+            <span data-availability>STATUS: AVAILABLE</span>
+          </div>
+          <h1 class="hero-title reveal" data-site-name>Santiago Valenti</h1>
+          <p class="hero-role reveal" data-site-role>Full Stack Developer</p>
+          <p class="hero-description reveal" data-site-description>
+            Desarrollo aplicaciones y sistemas web reales con backend sólido, interfaces claras, bases de datos,
+            integraciones y despliegues preparados para producción.
+          </p>
+          <div class="stack-strip reveal" id="hero-stack" aria-label="Stack principal"></div>
+          <div class="hero-actions reveal">
+            <a class="button button-primary" href="#projects" data-magnetic>
+              <span>Ver proyectos</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </a>
+            <a class="button button-secondary" href="/cv.pdf" data-cv-link download data-magnetic>
+              <i data-lucide="download" aria-hidden="true"></i>
+              <span>Descargar CV</span>
+            </a>
+            <a class="button button-ghost" href="#contact" data-magnetic>
+              <i data-lucide="mail" aria-hidden="true"></i>
+              <span>Contactarme</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-visual reveal" aria-label="Presentación visual">
+          <figure class="profile-shell spotlight-card" data-tilt>
+            <div class="profile-meta">
+              <span>JAVA / SPRING</span>
+              <span data-build-label>BUILD: STATIC</span>
+            </div>
+            <img src="/images/profile.jpg" alt="Foto de Santiago Valenti" width="900" height="1125"
+              data-profile-image />
+            <figcaption>
+              <span>Full Stack Developer</span>
+              <strong>Software systems, APIs & deploys</strong>
+            </figcaption>
+          </figure>
+        </aside>
+      </div>
+      <a class="next-teaser reveal" href="#about">
+        <span>[02] Sobre mí</span>
+        <strong>Backend, frontend e integración</strong>
+        <i data-lucide="arrow-right" aria-hidden="true"></i>
+      </a>
+    </section>
+
+    <section class="about section-block" id="about" data-section>
+      <div class="section-heading reveal">
+        <p class="section-kicker"><span>[02]</span><span>Sobre mí</span></p>
+        <h2>Backend sólido, frontend claro y criterio de producto.</h2>
+      </div>
+      <div class="about-layout">
+        <div class="editorial-copy reveal">
+          <p>
+            Soy <strong>Santiago Valenti</strong>, Full Stack Developer orientado a construir aplicaciones web
+            completas: backend con Java y Spring Boot, interfaces funcionales, bases de datos, autenticación,
+            integraciones y despliegue.
+          </p>
+          <p>
+            Mi foco está en sistemas reales: productos que ordenan procesos, conectan servicios externos y ayudan a
+            operar mejor. El portfolio deja el contenido centralizado para actualizar proyectos, formación y enlaces
+            sin tocar la estructura visual.
+          </p>
+        </div>
+        <div class="capability-grid" aria-label="Capacidades principales">
+          <article class="capability reveal">
+            <span>01</span>
+            <h3>Backend</h3>
+            <p>Java, Spring Boot, APIs REST, seguridad, persistencia y reglas de negocio.</p>
+          </article>
+          <article class="capability reveal">
+            <span>02</span>
+            <h3>Frontend</h3>
+            <p>Interfaces web claras con HTML, CSS, JavaScript, Bootstrap y frameworks cuando aportan valor.</p>
+          </article>
+          <article class="capability reveal">
+            <span>03</span>
+            <h3>Integración</h3>
+            <p>OAuth2, Mercado Pago, APIs externas, Docker, Linux, Nginx y despliegues web.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects section-block" id="projects" data-section>
+      <div class="section-heading reveal">
+        <p class="section-kicker"><span>[03]</span><span>Proyectos seleccionados</span></p>
+        <h2>Sistemas web pensados como producto, no como demo aislada.</h2>
+      </div>
+      <div class="project-grid featured-grid" id="featured-projects"></div>
+      <div class="section-action reveal">
+        <a class="button button-secondary" href="/proyectos.html" data-magnetic>
+          <span>Explorar todos los proyectos</span>
+          <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
+
+    <section class="education section-block" id="education" data-section>
+      <div class="section-heading reveal">
+        <p class="section-kicker"><span>[04]</span><span>Estudios / Formación</span></p>
+        <h2>Base técnica editable para formación, cursos y certificaciones reales.</h2>
+      </div>
+      <div class="education-layout">
+        <div>
+          <h3 class="subsection-title reveal">Formación</h3>
+          <div class="timeline" id="education-list"></div>
+        </div>
+        <div>
+          <h3 class="subsection-title reveal">Cursos y certificaciones</h3>
+          <div class="course-grid" id="course-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="technologies section-block" id="technologies" data-section>
+      <div class="section-heading reveal">
+        <p class="section-kicker"><span>[05]</span><span>Technologies / Stack</span></p>
+        <h2>Una matriz técnica preparada para crecer con proyectos reales.</h2>
+      </div>
+      <div class="tech-grid" id="technology-grid"></div>
+    </section>
+
+    <section class="contact section-block" id="contact" data-section>
+      <div class="contact-layout">
+        <div class="contact-copy reveal">
+          <p class="section-kicker"><span>[06]</span><span>Contacto</span></p>
+          <h2>¿Tenés un proyecto en mente?</h2>
+          <p>
+            Contame qué necesitás construir, mejorar o poner online. El formulario usa Netlify Forms, así que el sitio
+            sigue siendo completamente estático.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:agregar-email@dominio.com" data-email-link>
+              <i data-lucide="mail" aria-hidden="true"></i>
+              <span data-site-email>agregar-email@dominio.com</span>
+            </a>
+            <a href="#editar-linkedin" data-linkedin-link>
+              <i data-lucide="linkedin" aria-hidden="true"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a href="#editar-github" data-github-link>
+              <i data-lucide="github" aria-hidden="true"></i>
+              <span>GitHub</span>
+            </a>
+          </div>
+        </div>
+
+        <form class="contact-form reveal" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+          data-contact-form>
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="subject" value="Nuevo contacto desde el portfolio" />
+          <p class="sr-only">
+            <label>No completar <input name="bot-field" /></label>
+          </p>
+          <label>
+            <span>Nombre</span>
+            <input type="text" name="name" autocomplete="name" required minlength="2" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            <span>Mensaje</span>
+            <textarea name="message" rows="5" required minlength="10"></textarea>
+          </label>
+          <button class="button button-primary" type="submit" data-submit-button>
+            <span>Enviar mensaje</span>
+            <i data-lucide="send" aria-hidden="true"></i>
+          </button>
+          <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong data-site-name>Santiago Valenti</strong>
+      <span>Full Stack Developer</span>
+    </div>
+    <div class="footer-links">
+      <a href="#editar-github" data-github-link>GitHub</a>
+      <a href="#editar-linkedin" data-linkedin-link>LinkedIn</a>
+      <a href="mailto:agregar-email@dominio.com" data-email-link>Email</a>
+    </div>
+    <small>© <span data-current-year></span> Santiago Valenti. Static build.</small>
+  </footer>
+
+  <button class="back-to-top" type="button" aria-label="Volver arriba" data-back-to-top>
+    <i data-lucide="chevron-up" aria-hidden="true"></i>
+  </button>
+
+  <script type="module" src="/src/js/main.ts"></script>
+</body>
+
+</html>

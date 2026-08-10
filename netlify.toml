@@ -1,0 +1,44 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[redirects]]
+  from = "/proyectos"
+  to = "/proyectos.html"
+  status = 200
+
+[[redirects]]
+  from = "/proyectos/sonrie-plus"
+  to = "/proyectos/sonrie-plus.html"
+  status = 200
+
+[[redirects]]
+  from = "/proyectos/turnero-facil"
+  to = "/proyectos/turnero-facil.html"
+  status = 200
+
+[[redirects]]
+  from = "/proyectos/gimnasios"
+  to = "/proyectos/gimnasios.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
