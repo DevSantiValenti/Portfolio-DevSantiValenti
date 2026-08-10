@@ -64,7 +64,6 @@ export const projects: Project[] = [
       "Google OAuth2 para autenticación social",
       "Mercado Pago para preferencias, pagos y notificaciones",
       "Unicobros para checkout y pagos",
-      "Twilio WhatsApp para notificaciones y mensajería externa",
       "SMTP Gmail/corporativo para verificación de email y recuperación de contraseña",
       "Cloudflare Tunnel para publicación HTTPS de desarrollo o integraciones"
     ],
@@ -209,7 +208,7 @@ export const projects: Project[] = [
     solution:
       "Aplicación web administrativa con registro centralizado de socios, cuotas y movimientos de caja. Cada pago queda asociado a socio, actividad, monto, forma de pago y fecha/hora de creación con zona horaria de Argentina. La caja permite filtrar movimientos, ver totales y eliminar registros según permisos.",
     architecture:
-      "Aplicación Java 21 con Spring Boot 3.5.7, Spring MVC, Spring Security, Spring Data JPA, Hibernate, MySQL, Thymeleaf, Thymeleaf Layout Dialect, DataTables, Bootstrap, Maven y JavaScript. OpenPDF queda preparado para recibos PDF y Evolution API para una futura integración con WhatsApp.",
+      "Aplicación Java 21 con Spring Boot 3.5.7, Spring MVC, Spring Security, Spring Data JPA, Hibernate, MySQL, Thymeleaf, Thymeleaf Layout Dialect, DataTables, Bootstrap, Maven y JavaScript. OpenPDF queda preparado para recibos PDF.",
     benefits: [
       "Menos errores administrativos en cobros y vencimientos",
       "Mayor control sobre caja diaria",
@@ -221,7 +220,6 @@ export const projects: Project[] = [
     ],
     integrations: [
       "Base de datos MySQL",
-      "Evolution API preparada para WhatsApp",
       "OpenPDF preparado para recibos PDF",
       "Despliegue en servidor Ubuntu"
     ],

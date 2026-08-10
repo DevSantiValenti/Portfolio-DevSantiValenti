@@ -23,12 +23,12 @@ export const technologies: TechnologyCategory[] = [
     category: "DevOps / Infrastructure",
     icon: "boxes",
     description: "Entornos de despliegue, versionado e infraestructura web.",
-    items: ["Docker", "Linux", "Git", "GitHub", "Nginx", "VPS"]
+    items: ["Docker", "Linux", "Git", "GitHub", "Nginx", "VPS", "Netlify"]
   },
   {
     category: "Integrations",
     icon: "plug",
     description: "Conexión con servicios externos y flujos de autenticación o pago.",
-    items: ["OAuth2", "Mercado Pago", "APIs externas"]
+    items: ["OAuth2", "Mercado Pago", "Unicobros", "OCA API", "APIs externas"]
   }
 ];
