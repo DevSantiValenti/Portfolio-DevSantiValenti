@@ -79,7 +79,7 @@ export const projects: Project[] = [
   {
     id: "02",
     slug: "turnero-facil",
-    title: "Turnero Fácil / AgendApp",
+    title: "Turnero Fácil",
     shortDescription: "Sistema web de gestión de turnos para clínicas odontológicas y consultorios.",
     description:
       "Sistema privado para administrar agenda, pacientes, profesionales, turnos, pagos e ingresos desde una plataforma centralizada. Incluye versión operativa para clínicas y una sincronización con SONRIE+ para mantener turnos conectados entre canales.",
@@ -159,7 +159,7 @@ export const projects: Project[] = [
   {
     id: "03",
     slug: "gimnasios",
-    title: "HalconGym",
+    title: "Sistema Gestor de Gimnasios",
     shortDescription: "Sistema web de gestión para gimnasios, socios, cuotas, caja y estadísticas.",
     description:
       "Sistema administrativo desarrollado a medida para gimnasios. Permite gestionar socios, cuotas, ingresos, caja, gastos, actividades y estadísticas desde una plataforma centralizada preparada para uso diario.",
@@ -314,7 +314,7 @@ export const projects: Project[] = [
     demoUrl: "https://electrodentalnea.com.ar",
     githubUrl: "https://github.com/DevSantiValenti/electrodentalNea",
     externalUrl: "https://electrodentalnea.com.ar",
-    featured: false
+    featured: true
   },
   {
     id: "05",

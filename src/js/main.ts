@@ -8,6 +8,8 @@ import {
   Boxes,
   CalendarDays,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
   ChevronUp,
   Code2,
   Cpu,
@@ -50,6 +52,8 @@ const iconSet = {
   Boxes,
   CalendarDays,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
   ChevronUp,
   Code2,
   Cpu,
@@ -99,31 +103,81 @@ const renderSharedContent = (): void => {
   setHref("[data-whatsapp-link]", site.whatsappUrl);
   setHref("[data-cv-link]", site.cvUrl);
 
-  document.querySelectorAll<HTMLImageElement>("[data-profile-image]").forEach((image) => {
-    image.src = site.profileImage;
-    image.alt = `Foto de ${site.name}`;
-  });
-
   const heroStack = document.querySelector("#hero-stack");
   if (heroStack) {
     heroStack.innerHTML = site.heroStack.map((item) => `<span>${item}</span>`).join("");
   }
 };
 
-const renderAboutMedia = (): void => {
-  const target = document.querySelector("#about-media");
+const renderProfileCarousel = (): void => {
+  const target = document.querySelector("#profile-carousel");
   if (!target) return;
 
-  target.innerHTML = site.aboutImages
-    .map(
-      (image) => `
-        <figure class="about-photo reveal spotlight-card">
-          <img src="${image.src}" alt="${image.alt}" loading="lazy" width="900" height="1125" />
-          <figcaption>${image.label}</figcaption>
-        </figure>
-      `
-    )
-    .join("");
+  const slides = site.aboutImages;
+  let activeIndex = 0;
+
+  target.innerHTML = `
+    <div class="profile-carousel-stage">
+      ${slides
+        .map(
+          (image, index) => `
+            <div class="profile-slide" data-profile-slide data-index="${index}">
+              <img src="${image.src}" alt="${image.alt}" loading="${index === 0 ? "eager" : "lazy"}" width="900" height="1125" />
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+    <div class="profile-carousel-controls" aria-label="Controles de fotos">
+      <button class="profile-carousel-button" type="button" data-profile-prev aria-label="Foto anterior">
+        <i data-lucide="chevron-left" aria-hidden="true"></i>
+      </button>
+      <div class="profile-carousel-dots">
+        ${slides
+          .map(
+            (image, index) => `
+              <button class="profile-carousel-dot" type="button" data-profile-dot data-index="${index}" aria-label="Ver ${image.label}">
+                <span>${index + 1}</span>
+              </button>
+            `
+          )
+          .join("")}
+      </div>
+      <button class="profile-carousel-button" type="button" data-profile-next aria-label="Foto siguiente">
+        <i data-lucide="chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  `;
+
+  const slideElements = Array.from(target.querySelectorAll<HTMLElement>("[data-profile-slide]"));
+  const dots = Array.from(target.querySelectorAll<HTMLButtonElement>("[data-profile-dot]"));
+  const previousButton = target.querySelector<HTMLButtonElement>("[data-profile-prev]");
+  const nextButton = target.querySelector<HTMLButtonElement>("[data-profile-next]");
+
+  const updateCarousel = (): void => {
+    slideElements.forEach((slide, index) => {
+      const isActive = index === activeIndex;
+      slide.classList.toggle("is-active", isActive);
+      slide.setAttribute("aria-hidden", String(!isActive));
+    });
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("is-active", index === activeIndex);
+    });
+  };
+
+  const goTo = (index: number): void => {
+    activeIndex = (index + slides.length) % slides.length;
+    updateCarousel();
+  };
+
+  previousButton?.addEventListener("click", () => goTo(activeIndex - 1));
+  nextButton?.addEventListener("click", () => goTo(activeIndex + 1));
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => goTo(Number(dot.dataset.index ?? 0)));
+  });
+
+  updateCarousel();
 };
 
 const renderEducation = (): void => {
@@ -202,7 +256,7 @@ const renderTechnologies = (): void => {
 
 document.addEventListener("DOMContentLoaded", () => {
   renderSharedContent();
-  renderAboutMedia();
+  renderProfileCarousel();
   renderEducation();
   renderCourses();
   renderTechnologies();

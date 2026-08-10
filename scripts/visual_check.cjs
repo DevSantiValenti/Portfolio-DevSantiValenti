@@ -49,8 +49,31 @@ const revealPage = async (page) => {
     if (!(await page.title()).includes("Santiago Valenti")) {
       failures.push(`${name}: home title did not include Santiago Valenti`);
     }
-    if ((await page.locator("#featured-projects .project-card").count()) !== 3) {
-      failures.push(`${name}: expected 3 featured project cards`);
+    if ((await page.locator("#featured-projects .project-card").count()) < 4) {
+      failures.push(`${name}: expected at least 4 featured project cards`);
+    }
+    if ((await page.locator("#profile-carousel [data-profile-slide]").count()) < 2) {
+      failures.push(`${name}: expected profile carousel slides`);
+    }
+    const initialProfileAlt = await page.locator("#profile-carousel .profile-slide.is-active img").getAttribute("alt");
+    await page.locator("#profile-carousel [data-profile-next]").click();
+    await page.waitForTimeout(520);
+    const nextProfileAlt = await page.locator("#profile-carousel .profile-slide.is-active img").getAttribute("alt");
+    if (nextProfileAlt === initialProfileAlt) {
+      failures.push(`${name}: profile carousel next control did not change active image`);
+    }
+    const initialFeaturedTitle = await page.locator("#featured-projects .carousel-slide.is-active h3").innerText();
+    await page.locator("#featured-projects [data-carousel-next]").click();
+    await page.waitForTimeout(760);
+    const nextFeaturedTitle = await page.locator("#featured-projects .carousel-slide.is-active h3").innerText();
+    if (nextFeaturedTitle === initialFeaturedTitle) {
+      failures.push(`${name}: carousel next control did not change active project`);
+    }
+    await page.locator('#featured-projects [data-carousel-dot][data-index="3"]').click();
+    await page.waitForTimeout(760);
+    const electrodentalTitle = await page.locator("#featured-projects .carousel-slide.is-active h3").innerText();
+    if (!electrodentalTitle.includes("ElectrodentalNea")) {
+      failures.push(`${name}: carousel dot 04 did not activate ElectrodentalNea`);
     }
     if (await hasHorizontalOverflow(page)) {
       failures.push(`${name}: home has horizontal overflow`);
@@ -106,10 +129,10 @@ const revealPage = async (page) => {
     await page.goto(`${BASE_URL}/proyectos/sonrie-plus.html`, { waitUntil: "networkidle" });
     const caseTitle = await page.locator("#case-study-root h1").first().innerText();
     if (!caseTitle.includes("SONRIE+")) {
-      failures.push(`${name}: case study did not render SONRIE+`);
+      failures.push(`${name}: project detail did not render SONRIE+`);
     }
     if (await hasHorizontalOverflow(page)) {
-      failures.push(`${name}: case study has horizontal overflow`);
+      failures.push(`${name}: project detail has horizontal overflow`);
     }
     await revealPage(page);
     await page.locator(".case-detail-grid").first().scrollIntoViewIfNeeded();

@@ -49,7 +49,7 @@ const renderProjectLinks = (project: Project): string => {
 
   return `
     <div class="project-links">
-      <a href="${projectUrl(project)}">Case study <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+      <a href="${projectUrl(project)}">Ver más <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
       ${optionalLinks}
     </div>
   `;
@@ -87,7 +87,7 @@ export const projectCardTemplate = (project: Project): string => `
     data-category="${project.category}"
     data-tech="${project.technologies.join(" ")}"
   >
-    <a class="project-image-link" href="${projectUrl(project)}" aria-label="Ver case study de ${project.title}">
+    <a class="project-image-link" href="${projectUrl(project)}" aria-label="Ver detalle de ${project.title}">
       ${renderProjectPreview(project)}
     </a>
     <div class="project-content">
@@ -110,7 +110,103 @@ export const renderFeaturedProjects = (projectData: Project[]): void => {
   const target = document.querySelector("#featured-projects");
   if (!target) return;
 
-  target.innerHTML = projectData.filter((project) => project.featured).slice(0, 3).map(projectCardTemplate).join("");
+  const featuredProjects = projectData.filter((project) => project.featured);
+  if (featuredProjects.length === 0) {
+    target.innerHTML = "";
+    return;
+  }
+
+  target.innerHTML = `
+    <div class="featured-carousel reveal" data-featured-carousel tabindex="0" aria-label="Carrusel 3D de proyectos seleccionados">
+      <div class="carousel-stage" data-carousel-stage aria-live="polite">
+        ${featuredProjects
+          .map(
+            (project, index) => `
+              <div class="carousel-slide" data-carousel-slide data-index="${index}">
+                ${projectCardTemplate(project)}
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+      <div class="carousel-controls" aria-label="Controles del carrusel">
+        <button class="carousel-button" type="button" data-carousel-prev aria-label="Proyecto anterior">
+          <i data-lucide="chevron-left" aria-hidden="true"></i>
+        </button>
+        <div class="carousel-dots" role="tablist" aria-label="Seleccionar proyecto">
+          ${featuredProjects
+            .map(
+              (project, index) => `
+                <button class="carousel-dot" type="button" data-carousel-dot data-index="${index}" aria-label="Ver ${project.title}">
+                  <span>${project.id}</span>
+                </button>
+              `
+            )
+            .join("")}
+        </div>
+        <button class="carousel-button" type="button" data-carousel-next aria-label="Proyecto siguiente">
+          <i data-lucide="chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  `;
+
+  const carousel = target.querySelector<HTMLElement>("[data-featured-carousel]");
+  const slides = Array.from(target.querySelectorAll<HTMLElement>("[data-carousel-slide]"));
+  const dots = Array.from(target.querySelectorAll<HTMLButtonElement>("[data-carousel-dot]"));
+  const previousButton = target.querySelector<HTMLButtonElement>("[data-carousel-prev]");
+  const nextButton = target.querySelector<HTMLButtonElement>("[data-carousel-next]");
+  let activeIndex = 0;
+
+  const getSlideState = (index: number): string => {
+    const position = (index - activeIndex + featuredProjects.length) % featuredProjects.length;
+    if (position === 0) return "is-active";
+    if (position === 1) return "is-next";
+    if (position === featuredProjects.length - 1) return "is-prev";
+    return "is-hidden";
+  };
+
+  const updateCarousel = (): void => {
+    slides.forEach((slide, index) => {
+      const state = getSlideState(index);
+      const isActive = state === "is-active";
+
+      slide.classList.remove("is-active", "is-prev", "is-next", "is-hidden");
+      slide.classList.add(state);
+      slide.setAttribute("aria-hidden", String(!isActive));
+      slide.querySelectorAll<HTMLElement>("a, button").forEach((element) => {
+        element.tabIndex = isActive ? 0 : -1;
+      });
+    });
+
+    dots.forEach((dot, index) => {
+      const isActive = index === activeIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", String(isActive));
+    });
+  };
+
+  const goTo = (index: number): void => {
+    activeIndex = (index + featuredProjects.length) % featuredProjects.length;
+    updateCarousel();
+  };
+
+  previousButton?.addEventListener("click", () => goTo(activeIndex - 1));
+  nextButton?.addEventListener("click", () => goTo(activeIndex + 1));
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const index = Number(dot.dataset.index ?? 0);
+      goTo(index);
+    });
+  });
+
+  carousel?.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") goTo(activeIndex - 1);
+    if (event.key === "ArrowRight") goTo(activeIndex + 1);
+  });
+
+  updateCarousel();
 };
 
 export const initProjectsPage = (projectData: Project[]): void => {
