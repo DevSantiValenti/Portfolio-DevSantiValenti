@@ -7,7 +7,7 @@ Landing page estática profesional para Santiago Valenti, orientada a Full Stack
 - HTML5, CSS3 y TypeScript
 - Vite como build tool frontend
 - Lucide para iconografía
-- Netlify Forms para el formulario de contacto
+- Contacto directo por email, WhatsApp, LinkedIn y GitHub
 - Sin backend, sin base de datos, sin autenticación y sin servidor propio
 
 ## Instalación
@@ -38,7 +38,7 @@ La configuración está en `netlify.toml`:
 - Publish directory: `dist`
 - Node: `22`
 
-Conectar el repositorio en Netlify y activar Forms desde el panel del sitio.
+Conectar el repositorio en Netlify. No hace falta configurar Forms ni funciones.
 
 ## Estructura
 
@@ -50,6 +50,8 @@ Conectar el repositorio en Netlify y activar Forms desde el panel del sitio.
     sonrie-plus.html
     turnero-facil.html
     gimnasios.html
+    electrodentalnea.html
+    denttech.html
   src/
     css/styles.css
     js/
@@ -57,7 +59,6 @@ Conectar el repositorio en Netlify y activar Forms desde el panel del sitio.
       animations.ts
       navigation.ts
       projects.ts
-      contact.ts
     data/
       site.ts
       projects.ts
@@ -66,7 +67,8 @@ Conectar el repositorio en Netlify y activar Forms desde el panel del sitio.
       technologies.ts
   public/
     images/
-      profile.jpg
+      perfil.jpeg
+      recibido.jpeg
       projects/
     cv.pdf
     og-image.jpg
@@ -93,10 +95,12 @@ Editar `src/data/site.ts`:
 Reemplazar:
 
 ```text
-public/images/profile.jpg
+public/images/perfil.jpeg
 ```
 
 Usar una imagen vertical, preferentemente 4:5 o similar.
+
+La sección "Sobre mí" también usa las fotos configuradas en `aboutImages` dentro de `src/data/site.ts`.
 
 ## Colocar CV
 
@@ -124,10 +128,17 @@ Cada proyecto soporta:
 - image
 - screenshots
 - technologies
+- objective
+- audience
+- sections
 - features
+- role
 - problem
 - solution
 - architecture
+- benefits
+- integrations
+- status
 - results
 - demoUrl
 - githubUrl
@@ -152,7 +163,7 @@ Editar `src/data/technologies.ts`.
 
 Editar `src/data/site.ts`.
 
-El formulario usa Netlify Forms. En producción, Netlify detecta el formulario desde `index.html` y también existe `public/__forms.html` como respaldo de detección.
+No hay formulario. Los botones apuntan directamente a `mailto:`, WhatsApp, LinkedIn y GitHub.
 
 ## SEO
 

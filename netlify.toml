@@ -25,6 +25,16 @@
   to = "/proyectos/gimnasios.html"
   status = 200
 
+[[redirects]]
+  from = "/proyectos/electrodentalnea"
+  to = "/proyectos/electrodentalnea.html"
+  status = 200
+
+[[redirects]]
+  from = "/proyectos/denttech"
+  to = "/proyectos/denttech.html"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]

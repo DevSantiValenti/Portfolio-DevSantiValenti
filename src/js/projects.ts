@@ -2,15 +2,47 @@ import type { Project } from "../data/types";
 
 const projectUrl = (project: Project): string => `/proyectos/${project.slug}.html`;
 
+const renderProjectPreview = (project: Project, className = "project-preview"): string => {
+  const screenshots = project.screenshots.length > 0 ? project.screenshots : [project.image];
+
+  if (screenshots.length === 1) {
+    return `
+      <div class="${className}">
+        <img src="${screenshots[0]}" alt="Vista previa de ${project.title}" loading="lazy" width="1200" height="760" />
+      </div>
+    `;
+  }
+
+  return `
+    <div class="${className} project-preview-collage" aria-label="Capturas combinadas de ${project.title}">
+      ${screenshots
+        .slice(0, 2)
+        .map(
+          (screenshot, index) => `
+            <img
+              class="collage-shot collage-shot-${index + 1}"
+              src="${screenshot}"
+              alt="Captura ${index + 1} de ${project.title}"
+              loading="lazy"
+              width="1200"
+              height="760"
+            />
+          `
+        )
+        .join("")}
+    </div>
+  `;
+};
+
 const renderProjectLinks = (project: Project): string => {
   const optionalLinks = [
     project.demoUrl
-      ? `<a href="${project.demoUrl}" target="_blank" rel="noreferrer">Demo <i data-lucide="external-link" aria-hidden="true"></i></a>`
+      ? `<a href="${project.demoUrl}" target="_blank" rel="noreferrer">Sitio real <i data-lucide="external-link" aria-hidden="true"></i></a>`
       : "",
     project.githubUrl
       ? `<a href="${project.githubUrl}" target="_blank" rel="noreferrer">GitHub <i data-lucide="github" aria-hidden="true"></i></a>`
       : "",
-    project.externalUrl
+    project.externalUrl && project.externalUrl !== project.demoUrl
       ? `<a href="${project.externalUrl}" target="_blank" rel="noreferrer">Sitio <i data-lucide="external-link" aria-hidden="true"></i></a>`
       : ""
   ].join("");
@@ -23,6 +55,31 @@ const renderProjectLinks = (project: Project): string => {
   `;
 };
 
+const listTemplate = (items: string[] | undefined): string => {
+  if (!items || items.length === 0) return "";
+  return `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+};
+
+const optionalPanel = (title: string, content?: string): string => {
+  if (!content) return "";
+  return `
+    <article class="case-panel reveal">
+      <span class="meta-line">${title}</span>
+      <p>${content}</p>
+    </article>
+  `;
+};
+
+const optionalListPanel = (title: string, items?: string[]): string => {
+  if (!items || items.length === 0) return "";
+  return `
+    <article class="case-panel reveal">
+      <span class="meta-line">${title}</span>
+      ${listTemplate(items)}
+    </article>
+  `;
+};
+
 export const projectCardTemplate = (project: Project): string => `
   <article
     class="project-card reveal spotlight-card"
@@ -31,7 +88,7 @@ export const projectCardTemplate = (project: Project): string => `
     data-tech="${project.technologies.join(" ")}"
   >
     <a class="project-image-link" href="${projectUrl(project)}" aria-label="Ver case study de ${project.title}">
-      <img src="${project.image}" alt="Vista previa editable de ${project.title}" loading="lazy" width="1200" height="760" />
+      ${renderProjectPreview(project)}
     </a>
     <div class="project-content">
       <div class="project-meta">
@@ -112,12 +169,14 @@ export const renderCaseStudy = (projectData: Project[]): void => {
         ${renderProjectLinks(project)}
       </div>
       <figure class="case-visual reveal spotlight-card" data-tilt>
-        <img src="${project.image}" alt="Screenshot editable de ${project.title}" width="1200" height="760" />
+        ${renderProjectPreview(project, "case-preview")}
       </figure>
     </header>
 
     <section class="case-section section-block">
       <div class="case-grid">
+        ${optionalPanel("Objetivo", project.objective)}
+        ${optionalPanel("Público objetivo", project.audience)}
         <article class="case-panel reveal">
           <span class="meta-line">Problema</span>
           <h2>Contexto</h2>
@@ -133,22 +192,37 @@ export const renderCaseStudy = (projectData: Project[]): void => {
 
     <section class="case-section section-block">
       <div class="section-heading reveal">
+        <p class="section-kicker"><span>[SCOPE]</span><span>Alcance</span></p>
+        <h2>Secciones, funciones y rol en el proyecto.</h2>
+      </div>
+      <div class="case-detail-grid">
+        ${optionalListPanel("Secciones", project.sections)}
+        <article class="case-panel reveal">
+          <span class="meta-line">Funcionalidades</span>
+          ${listTemplate(project.features)}
+        </article>
+        ${optionalPanel("Qué hice", project.role)}
+      </div>
+    </section>
+
+    <section class="case-section section-block">
+      <div class="section-heading reveal">
         <p class="section-kicker"><span>[ARCH]</span><span>Arquitectura</span></p>
-        <h2>Base técnica documentable.</h2>
+        <h2>Arquitectura, beneficios e integraciones.</h2>
       </div>
       <div class="case-detail-grid">
         <article class="case-panel reveal">
           <h3>Arquitectura</h3>
           <p>${project.architecture}</p>
         </article>
+        ${optionalListPanel("Beneficios", project.benefits)}
+        ${optionalListPanel("Integraciones", project.integrations)}
         <article class="case-panel reveal">
-          <h3>Características</h3>
-          <ul>
-            ${project.features.map((feature) => `<li>${feature}</li>`).join("")}
-          </ul>
+          <h3>Estado</h3>
+          <p>${project.status ?? "Estado pendiente de documentar."}</p>
         </article>
         <article class="case-panel reveal">
-          <h3>Resultados</h3>
+          <h3>Resultado</h3>
           <p>${project.results}</p>
         </article>
       </div>
@@ -157,7 +231,7 @@ export const renderCaseStudy = (projectData: Project[]): void => {
     <section class="case-section section-block">
       <div class="section-heading reveal">
         <p class="section-kicker"><span>[GALLERY]</span><span>Screenshots</span></p>
-        <h2>Galería preparada para capturas reales.</h2>
+        <h2>Galería del proyecto.</h2>
       </div>
       <div class="gallery-grid">
         ${project.screenshots

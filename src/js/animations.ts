@@ -18,13 +18,17 @@ export const initAnimations = (): void => {
         revealObserver.unobserve(entry.target);
       });
     },
-    { rootMargin: "0px 0px -10% 0px", threshold: 0.14 }
+    { rootMargin: "0px 0px 18% 0px", threshold: 0.02 }
   );
 
   revealElements.forEach((element, index) => {
     element.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 55}ms`);
     revealObserver.observe(element);
   });
+
+  window.setTimeout(() => {
+    revealElements.forEach((element) => element.classList.add("is-visible"));
+  }, 1400);
 
   if (!finePointerQuery.matches) return;
 

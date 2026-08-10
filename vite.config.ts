@@ -13,7 +13,9 @@ export default defineConfig({
         projects: resolve(__dirname, "proyectos.html"),
         sonriePlus: resolve(__dirname, "proyectos/sonrie-plus.html"),
         turneroFacil: resolve(__dirname, "proyectos/turnero-facil.html"),
-        gimnasios: resolve(__dirname, "proyectos/gimnasios.html")
+        gimnasios: resolve(__dirname, "proyectos/gimnasios.html"),
+        electrodentalnea: resolve(__dirname, "proyectos/electrodentalnea.html"),
+        denttech: resolve(__dirname, "proyectos/denttech.html")
       }
     }
   }

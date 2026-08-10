@@ -112,7 +112,7 @@ const revealPage = async (page) => {
       failures.push(`${name}: case study has horizontal overflow`);
     }
     await revealPage(page);
-    await page.locator(".case-detail-grid").scrollIntoViewIfNeeded();
+    await page.locator(".case-detail-grid").first().scrollIntoViewIfNeeded();
     await page.waitForTimeout(180);
     await page.screenshot({ path: path.join(ARTIFACTS, `case-details-${name}.png`), fullPage: false });
     await page.evaluate(() => window.scrollTo(0, 0));

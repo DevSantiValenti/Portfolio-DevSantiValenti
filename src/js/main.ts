@@ -21,6 +21,7 @@ import {
   Layers3,
   Linkedin,
   Mail,
+  MessageCircle,
   Menu,
   Plug,
   Send,
@@ -36,7 +37,6 @@ import { projects } from "../data/projects";
 import { site } from "../data/site";
 import { technologies } from "../data/technologies";
 import { initAnimations } from "./animations";
-import { initContactForm } from "./contact";
 import { initNavigation } from "./navigation";
 import { initProjectsPage, renderCaseStudy, renderFeaturedProjects } from "./projects";
 
@@ -63,6 +63,7 @@ const iconSet = {
   Layers3,
   Linkedin,
   Mail,
+  MessageCircle,
   Menu,
   Plug,
   Send,
@@ -95,6 +96,7 @@ const renderSharedContent = (): void => {
   setHref("[data-email-link]", `mailto:${site.email}`);
   setHref("[data-github-link]", site.githubUrl);
   setHref("[data-linkedin-link]", site.linkedinUrl);
+  setHref("[data-whatsapp-link]", site.whatsappUrl);
   setHref("[data-cv-link]", site.cvUrl);
 
   document.querySelectorAll<HTMLImageElement>("[data-profile-image]").forEach((image) => {
@@ -106,6 +108,22 @@ const renderSharedContent = (): void => {
   if (heroStack) {
     heroStack.innerHTML = site.heroStack.map((item) => `<span>${item}</span>`).join("");
   }
+};
+
+const renderAboutMedia = (): void => {
+  const target = document.querySelector("#about-media");
+  if (!target) return;
+
+  target.innerHTML = site.aboutImages
+    .map(
+      (image) => `
+        <figure class="about-photo reveal spotlight-card">
+          <img src="${image.src}" alt="${image.alt}" loading="lazy" width="900" height="1125" />
+          <figcaption>${image.label}</figcaption>
+        </figure>
+      `
+    )
+    .join("");
 };
 
 const renderEducation = (): void => {
@@ -184,6 +202,7 @@ const renderTechnologies = (): void => {
 
 document.addEventListener("DOMContentLoaded", () => {
   renderSharedContent();
+  renderAboutMedia();
   renderEducation();
   renderCourses();
   renderTechnologies();
@@ -194,6 +213,5 @@ document.addEventListener("DOMContentLoaded", () => {
   createIcons({ icons: iconSet });
 
   initNavigation();
-  initContactForm();
   initAnimations();
 });

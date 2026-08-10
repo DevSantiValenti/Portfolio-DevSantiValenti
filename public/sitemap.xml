@@ -20,4 +20,12 @@
     <loc>https://santiago-valenti.netlify.app/proyectos/gimnasios.html</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://santiago-valenti.netlify.app/proyectos/electrodentalnea.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://santiago-valenti.netlify.app/proyectos/denttech.html</loc>
+    <priority>0.6</priority>
+  </url>
 </urlset>

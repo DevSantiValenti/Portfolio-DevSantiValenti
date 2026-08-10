@@ -12,6 +12,11 @@ export interface SiteProfile {
   whatsappUrl: string;
   cvUrl: string;
   profileImage: string;
+  aboutImages: {
+    src: string;
+    alt: string;
+    label: string;
+  }[];
   ogImage: string;
   canonicalUrl: string;
 }
@@ -27,10 +32,17 @@ export interface Project {
   image: string;
   screenshots: string[];
   technologies: string[];
+  objective?: string;
+  audience?: string;
+  sections?: string[];
   features: string[];
+  role?: string;
   problem: string;
   solution: string;
   architecture: string;
+  benefits?: string[];
+  integrations?: string[];
+  status?: string;
   results: string;
   demoUrl: string | null;
   githubUrl: string | null;

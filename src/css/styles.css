@@ -246,6 +246,7 @@ button {
 .button svg,
 .dock-link svg,
 .contact-links svg,
+.contact-panel svg,
 .card-icon svg {
   width: 17px;
   height: 17px;
@@ -447,7 +448,9 @@ button {
 .course-card,
 .case-panel,
 .gallery-item,
-.case-visual {
+.case-visual,
+.about-photo,
+.contact-panel {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: linear-gradient(180deg, rgba(245, 243, 233, 0.06), rgba(245, 243, 233, 0.025));
@@ -572,6 +575,34 @@ button {
   color: var(--accent);
 }
 
+.about-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.about-photo {
+  margin: 0;
+  padding: 8px;
+}
+
+.about-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid rgba(245, 243, 233, 0.08);
+  border-radius: 6px;
+}
+
+.about-photo figcaption {
+  padding: 10px 2px 2px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
 .capability-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -634,18 +665,60 @@ button {
   padding: 8px 8px 0;
 }
 
-.project-card img,
-.case-visual img,
-.gallery-item img {
+.project-preview,
+.case-preview {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  object-fit: cover;
-  border-radius: 6px;
+  overflow: hidden;
   border: 1px solid rgba(245, 243, 233, 0.08);
+  border-radius: 6px;
+  background: rgba(8, 9, 6, 0.62);
+}
+
+.project-preview img,
+.case-preview img,
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform 320ms ease;
 }
 
-.project-card:hover img {
+.gallery-item img {
+  height: auto;
+  aspect-ratio: 16 / 10;
+  border: 1px solid rgba(245, 243, 233, 0.08);
+  border-radius: 6px;
+}
+
+.project-preview-collage {
+  display: block;
+}
+
+.project-preview-collage img {
+  position: absolute;
+  width: 72%;
+  height: 78%;
+  border: 1px solid rgba(245, 243, 233, 0.16);
+  border-radius: 6px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.project-preview-collage .collage-shot-1 {
+  top: 9%;
+  left: 5%;
+  z-index: 2;
+}
+
+.project-preview-collage .collage-shot-2 {
+  right: 5%;
+  bottom: 9%;
+  z-index: 1;
+  filter: saturate(0.88) brightness(0.82);
+}
+
+.project-card:hover .project-preview img {
   transform: scale(1.025) translateY(-2px);
 }
 
@@ -802,7 +875,7 @@ button {
 }
 
 .contact-copy,
-.contact-form,
+.contact-panel,
 .project-cta {
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -836,6 +909,33 @@ button {
 .contact-links a:hover {
   border-color: var(--accent-line);
   background: var(--accent-soft);
+}
+
+.contact-panel {
+  display: grid;
+  align-content: center;
+  gap: 16px;
+  padding: 34px;
+}
+
+.contact-panel h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.65rem;
+}
+
+.contact-panel p {
+  max-width: 520px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
 }
 
 .contact-form {
@@ -1032,6 +1132,10 @@ button {
 
 .case-visual {
   padding: 8px;
+}
+
+.case-preview {
+  aspect-ratio: 16 / 9;
 }
 
 .case-detail-grid {
@@ -1294,6 +1398,7 @@ button {
 
   .course-grid,
   .tech-grid,
+  .about-photo-grid,
   .all-projects-grid,
   .gallery-grid {
     grid-template-columns: 1fr;
@@ -1344,8 +1449,14 @@ button {
 
   .contact-copy,
   .contact-form,
+  .contact-panel,
   .project-cta {
     padding: 22px;
+  }
+
+  .contact-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .mobile-dock {

@@ -11,7 +11,7 @@ export const technologies: TechnologyCategory[] = [
     category: "Frontend",
     icon: "code-2",
     description: "Interfaces web claras para productos, paneles y sistemas internos.",
-    items: ["JavaScript", "HTML", "CSS", "Thymeleaf", "Bootstrap", "Tailwind CSS", "React", "TypeScript"]
+    items: ["JavaScript", "HTML", "CSS", "Thymeleaf", "Bootstrap", "React"]
   },
   {
     category: "Database",
