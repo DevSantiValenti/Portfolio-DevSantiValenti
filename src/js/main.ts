@@ -2,6 +2,7 @@ import "../css/styles.css";
 
 import {
   AlertCircle,
+  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   Award,
@@ -46,6 +47,7 @@ document.documentElement.classList.add("js-ready");
 
 const iconSet = {
   AlertCircle,
+  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   Award,

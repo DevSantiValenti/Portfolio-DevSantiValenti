@@ -91,6 +91,7 @@ export const projectCardTemplate = (project: Project): string => `
       ${renderProjectPreview(project)}
     </a>
     <div class="project-content">
+      ${project.active ? `<span class="project-status">Activo / en uso</span>` : ""}
       <div class="project-meta">
         <span>${project.id}</span>
         <span>${project.category}</span>

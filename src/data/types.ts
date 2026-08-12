@@ -48,6 +48,7 @@ export interface Project {
   githubUrl: string | null;
   externalUrl: string | null;
   featured: boolean;
+  active?: boolean;
 }
 
 export interface EducationItem {

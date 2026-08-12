@@ -74,7 +74,8 @@ export const projects: Project[] = [
     demoUrl: null,
     githubUrl: "https://github.com/Iterart/sonrie",
     externalUrl: null,
-    featured: true
+    featured: true,
+    active: true
   },
   {
     id: "02",
@@ -154,7 +155,8 @@ export const projects: Project[] = [
     demoUrl: null,
     githubUrl: null,
     externalUrl: null,
-    featured: true
+    featured: true,
+    active: true
   },
   {
     id: "03",
@@ -230,7 +232,8 @@ export const projects: Project[] = [
     demoUrl: null,
     githubUrl: null,
     externalUrl: null,
-    featured: true
+    featured: true,
+    active: true
   },
   {
     id: "04",
@@ -314,7 +317,8 @@ export const projects: Project[] = [
     demoUrl: "https://electrodentalnea.com.ar",
     githubUrl: "https://github.com/DevSantiValenti/electrodentalNea",
     externalUrl: "https://electrodentalnea.com.ar",
-    featured: true
+    featured: true,
+    active: true
   },
   {
     id: "05",
@@ -395,6 +399,7 @@ export const projects: Project[] = [
     githubUrl: null,
     externalUrl:
       "https://electrodentalnea.com.ar/catalogo?categoria=repuestos&subcategoria=plaquetas-electronicas-sillones",
-    featured: false
+    featured: false,
+    active: true
   }
 ];
