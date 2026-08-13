@@ -3,7 +3,11 @@ import type { Project } from "../data/types";
 const projectUrl = (project: Project): string => `/proyectos/${project.slug}.html`;
 
 const renderProjectPreview = (project: Project, className = "project-preview"): string => {
-  const screenshots = project.screenshots.length > 0 ? project.screenshots : [project.image];
+  const screenshots = project.thumbnailImages?.length
+    ? project.thumbnailImages
+    : project.screenshots.length > 0
+      ? project.screenshots
+      : [project.image];
 
   if (screenshots.length === 1) {
     return `
@@ -334,9 +338,17 @@ export const renderCaseStudy = (projectData: Project[]): void => {
       <div class="gallery-grid">
         ${project.screenshots
           .map(
-            (screenshot) => `
+            (screenshot, index) => `
               <figure class="gallery-item reveal spotlight-card">
-                <img src="${screenshot}" alt="Captura editable de ${project.title}" loading="lazy" decoding="async" width="1200" height="760" />
+                <button
+                  class="gallery-trigger"
+                  type="button"
+                  data-gallery-image="${screenshot}"
+                  data-gallery-title="${project.title}"
+                  data-gallery-alt="Captura ${index + 1} de ${project.title}"
+                >
+                  <img src="${screenshot}" alt="Captura ${index + 1} de ${project.title}" loading="lazy" decoding="async" width="1200" height="760" />
+                </button>
               </figure>
             `
           )

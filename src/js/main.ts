@@ -309,6 +309,65 @@ const initCertificateModal = (): void => {
   });
 };
 
+const initGalleryModal = (): void => {
+  if (!document.querySelector("[data-gallery-image]")) return;
+
+  const modal = document.createElement("div");
+  modal.className = "certificate-modal gallery-modal";
+  modal.hidden = true;
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.innerHTML = `
+    <div class="certificate-modal-backdrop" data-gallery-close></div>
+    <div class="certificate-modal-dialog gallery-modal-dialog" role="document">
+      <header class="certificate-modal-header">
+        <div>
+          <span class="meta-line">Galería</span>
+          <h3 data-gallery-heading>Captura del proyecto</h3>
+        </div>
+        <button class="certificate-modal-close" type="button" data-gallery-close aria-label="Cerrar imagen">
+          Cerrar
+        </button>
+      </header>
+      <img data-gallery-modal-image src="" alt="" />
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  const image = modal.querySelector<HTMLImageElement>("[data-gallery-modal-image]");
+  const heading = modal.querySelector<HTMLElement>("[data-gallery-heading]");
+  const closeButtons = modal.querySelectorAll<HTMLElement>("[data-gallery-close]");
+
+  const closeModal = (): void => {
+    modal.hidden = true;
+    document.body.classList.remove("has-modal");
+  };
+
+  document.querySelectorAll<HTMLButtonElement>("[data-gallery-image]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const imageSrc = button.dataset.galleryImage;
+      if (!imageSrc || !image || !heading) return;
+
+      image.src = imageSrc;
+      image.alt = button.dataset.galleryAlt ?? "";
+      heading.textContent = button.dataset.galleryTitle ?? "Captura del proyecto";
+      modal.hidden = false;
+      document.body.classList.add("has-modal");
+    });
+  });
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", closeModal);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.hidden) {
+      closeModal();
+    }
+  });
+};
+
 const renderTechnologies = (): void => {
   const target = document.querySelector("#technology-grid");
   if (!target) return;
@@ -343,6 +402,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderFeaturedProjects(projects);
   initProjectsPage(projects);
   renderCaseStudy(projects);
+  initGalleryModal();
 
   createIcons({ icons: iconSet });
 

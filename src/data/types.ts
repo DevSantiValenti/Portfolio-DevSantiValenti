@@ -30,6 +30,7 @@ export interface Project {
   year: string;
   category: string;
   image: string;
+  thumbnailImages?: string[];
   screenshots: string[];
   technologies: string[];
   objective?: string;

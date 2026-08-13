@@ -87,7 +87,21 @@ export const projects: Project[] = [
     year: "2026",
     category: "Operaciones / turnos",
     image: "/images/projects/turnero-facil-agenda-uno.png",
-    screenshots: ["/images/projects/turnero-facil-agenda-uno.png", "/images/projects/turnero-facil-sonriete.png"],
+    thumbnailImages: [
+      "/images/projects/turnero-facil-agenda-uno.png",
+      "/images/projects/turnero-facil-sonriete.png"
+    ],
+    screenshots: [
+      "/images/projects/turnero-facil-agenda-uno.png",
+      "/images/projects/turnero-facil-sonriete.png",
+      "/images/projects/turnero-facil/agenda-diaria.png",
+      "/images/projects/turnero-facil/menu-turnos.png",
+      "/images/projects/turnero-facil/paciente-existente.png",
+      "/images/projects/turnero-facil/paciente-nuevo.png",
+      "/images/projects/turnero-facil/agenda-semanal.png",
+      "/images/projects/turnero-facil/profesionales.png",
+      "/images/projects/turnero-facil/pacientes-ficha.png"
+    ],
     technologies: [
       "Java 21",
       "Spring Boot",
@@ -168,7 +182,21 @@ export const projects: Project[] = [
     year: "2026",
     category: "Gestión deportiva",
     image: "/images/projects/gimnasios-halcon.png",
-    screenshots: ["/images/projects/gimnasios-halcon.png", "/images/projects/gimnasios-clubfit.png"],
+    thumbnailImages: ["/images/projects/gimnasios-clubfit.png", "/images/projects/gimnasios-halcon.png"],
+    screenshots: [
+      "/images/projects/gimnasios-clubfit.png",
+      "/images/projects/gimnasios-halcon.png",
+      "/images/projects/gimnasios/socios-listado.png",
+      "/images/projects/gimnasios/control-acceso-cuota-al-dia.png",
+      "/images/projects/gimnasios/control-acceso-cuota-vencida.png",
+      "/images/projects/gimnasios/ingresos-del-dia.png",
+      "/images/projects/gimnasios/socios-eliminados.png",
+      "/images/projects/gimnasios/actividades-listado.png",
+      "/images/projects/gimnasios/caja-movimientos.png",
+      "/images/projects/gimnasios/gastos-listado.png",
+      "/images/projects/gimnasios/estadisticas-ingresos.png",
+      "/images/projects/gimnasios/estadisticas-cuotas-inscripciones.png"
+    ],
     technologies: [
       "Java 21",
       "Spring Boot 3.5.7",
@@ -245,7 +273,18 @@ export const projects: Project[] = [
     year: "2026",
     category: "E-commerce odontológico",
     image: "/images/projects/electrodentalnea.png",
-    screenshots: ["/images/projects/electrodentalnea.png"],
+    thumbnailImages: ["/images/projects/electrodentalnea.png"],
+    screenshots: [
+      "/images/projects/electrodentalnea.png",
+      "/images/projects/electrodentalnea/productos-destacados.png",
+      "/images/projects/electrodentalnea/marcas-footer.png",
+      "/images/projects/electrodentalnea/catalogo-productos.png",
+      "/images/projects/electrodentalnea/categoria-compresores.png",
+      "/images/projects/electrodentalnea/detalle-producto.png",
+      "/images/projects/electrodentalnea/carrito.png",
+      "/images/projects/electrodentalnea/panel-control.png",
+      "/images/projects/electrodentalnea/admin-productos.png"
+    ],
     technologies: [
       "Java 21",
       "Spring Boot 4.0.6",

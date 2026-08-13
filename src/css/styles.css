@@ -265,6 +265,9 @@ button {
   width: min(var(--max), calc(100% - var(--pad) * 2));
   margin: 0 auto;
   padding: 92px 0;
+}
+
+.scroll-optimized {
   content-visibility: auto;
   contain-intrinsic-size: 900px;
 }
@@ -967,6 +970,21 @@ button {
   border-radius: 6px;
 }
 
+.gallery-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: zoom-in;
+}
+
+.gallery-trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 .project-preview-collage {
   display: block;
 }
@@ -1247,6 +1265,15 @@ button {
   border-radius: calc(var(--radius) - 4px);
   object-fit: contain;
   background: #ffffff;
+}
+
+.gallery-modal-dialog {
+  width: min(1180px, 100%);
+}
+
+.gallery-modal img {
+  max-height: calc(100svh - 140px);
+  background: rgba(8, 9, 6, 0.76);
 }
 
 body.has-modal {
@@ -1862,6 +1889,10 @@ body.has-modal {
 
   .profile-slide img {
     height: 230px;
+  }
+
+  .profile-slide:first-child img {
+    object-position: center 28%;
   }
 
   .profile-shell figcaption {

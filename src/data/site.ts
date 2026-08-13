@@ -8,7 +8,7 @@ export const site: SiteProfile = {
     "Desarrollo aplicaciones y sistemas web reales con backend sólido, interfaces claras, bases de datos, integraciones y despliegues preparados para producción.",
   heroStack: ["Java", "Spring Boot", "APIs REST", "MySQL", "Docker"],
   availability: "STATUS: AVAILABLE",
-  buildLabel: "BUILD: STATIC / NETLIFY READY",
+  buildLabel: "",
   email: "dev.santivalenti@gmail.com",
   githubUrl: "https://github.com/DevSantiValenti",
   linkedinUrl: "https://www.linkedin.com/in/santiago-valenti-b683b2373/",
