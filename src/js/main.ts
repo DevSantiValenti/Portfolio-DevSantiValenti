@@ -124,7 +124,7 @@ const renderProfileCarousel = (): void => {
         .map(
           (image, index) => `
             <div class="profile-slide" data-profile-slide data-index="${index}">
-              <img src="${image.src}" alt="${image.alt}" loading="${index === 0 ? "eager" : "lazy"}" width="900" height="1125" />
+              <img src="${image.src}" alt="${image.alt}" loading="${index === 0 ? "eager" : "lazy"}" decoding="async" width="900" height="1125" />
             </div>
           `
         )
@@ -211,25 +211,102 @@ const renderCourses = (): void => {
   if (!target) return;
 
   target.innerHTML = courses
-    .map(
-      (course) => `
+    .map((course) => {
+      const certificatePreview = course.certificateImage
+        ? `
+          <button
+            class="certificate-preview"
+            type="button"
+            data-certificate-image="${course.certificateImage}"
+            data-certificate-title="${course.name}"
+            data-certificate-alt="${course.certificateAlt ?? `Certificado de ${course.name}`}"
+          >
+            <img src="${course.certificateImage}" alt="${course.certificateAlt ?? `Certificado de ${course.name}`}" loading="lazy" decoding="async" />
+            <span>Ver certificado completo</span>
+          </button>
+        `
+        : "";
+
+      const certificateState = course.certificateUrl
+        ? `<a href="${course.certificateUrl}" target="_blank" rel="noreferrer">Certificado <i data-lucide="external-link" aria-hidden="true"></i></a>`
+        : course.certificateImage
+          ? `<span>Certificado adjunto</span>`
+          : `<span>Certificado pendiente</span>`;
+
+      return `
         <article class="course-card reveal spotlight-card">
           <div class="card-icon"><i data-lucide="award" aria-hidden="true"></i></div>
           <span class="meta-line">${course.platform} · ${course.date}</span>
           <h4>${course.name}</h4>
           <p>${course.description}</p>
+          ${certificatePreview}
           <div class="course-footer">
             <span>${course.duration}</span>
-            ${
-              course.certificateUrl
-                ? `<a href="${course.certificateUrl}" target="_blank" rel="noreferrer">Certificado <i data-lucide="external-link" aria-hidden="true"></i></a>`
-                : `<span>Certificado pendiente</span>`
-            }
+            ${certificateState}
           </div>
         </article>
-      `
-    )
+      `;
+    })
     .join("");
+};
+
+const initCertificateModal = (): void => {
+  if (!document.querySelector("[data-certificate-image]")) return;
+
+  const modal = document.createElement("div");
+  modal.className = "certificate-modal";
+  modal.hidden = true;
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.innerHTML = `
+    <div class="certificate-modal-backdrop" data-certificate-close></div>
+    <div class="certificate-modal-dialog" role="document">
+      <header class="certificate-modal-header">
+        <div>
+          <span class="meta-line">Certificado</span>
+          <h3 data-certificate-heading>Curso completado</h3>
+        </div>
+        <button class="certificate-modal-close" type="button" data-certificate-close aria-label="Cerrar certificado">
+          Cerrar
+        </button>
+      </header>
+      <img data-certificate-modal-image src="" alt="" />
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  const image = modal.querySelector<HTMLImageElement>("[data-certificate-modal-image]");
+  const heading = modal.querySelector<HTMLElement>("[data-certificate-heading]");
+  const closeButtons = modal.querySelectorAll<HTMLElement>("[data-certificate-close]");
+
+  const closeModal = (): void => {
+    modal.hidden = true;
+    document.body.classList.remove("has-modal");
+  };
+
+  document.querySelectorAll<HTMLButtonElement>("[data-certificate-image]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const imageSrc = button.dataset.certificateImage;
+      if (!imageSrc || !image || !heading) return;
+
+      image.src = imageSrc;
+      image.alt = button.dataset.certificateAlt ?? "";
+      heading.textContent = button.dataset.certificateTitle ?? "Curso completado";
+      modal.hidden = false;
+      document.body.classList.add("has-modal");
+    });
+  });
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", closeModal);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.hidden) {
+      closeModal();
+    }
+  });
 };
 
 const renderTechnologies = (): void => {
@@ -261,6 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderProfileCarousel();
   renderEducation();
   renderCourses();
+  initCertificateModal();
   renderTechnologies();
   renderFeaturedProjects(projects);
   initProjectsPage(projects);

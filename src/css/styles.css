@@ -265,6 +265,8 @@ button {
   width: min(var(--max), calc(100% - var(--pad) * 2));
   margin: 0 auto;
   padding: 92px 0;
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
 }
 
 .hero {
@@ -465,11 +467,9 @@ button {
   --tilt-x: 0deg;
   --tilt-y: 0deg;
   position: relative;
+  contain: paint;
   overflow: hidden;
-  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
-  transform-style: preserve-3d;
   transition:
-    transform 220ms ease,
     border-color 220ms ease,
     background-color 220ms ease;
 }
@@ -495,6 +495,25 @@ button {
 
 .spotlight-card:hover::after {
   opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .spotlight-card[data-tilt]:hover {
+    transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .spotlight-card::after {
+    display: none;
+  }
+
+  .certificate-preview:hover,
+  .certificate-preview:focus-visible {
+    transform: none;
+  }
 }
 
 .profile-shell {
@@ -727,6 +746,7 @@ button {
 
 .featured-carousel {
   position: relative;
+  contain: layout paint;
   display: grid;
   gap: 22px;
   overflow: hidden;
@@ -736,6 +756,7 @@ button {
 .carousel-stage {
   position: relative;
   display: grid;
+  isolation: isolate;
   transform-style: preserve-3d;
 }
 
@@ -752,9 +773,20 @@ button {
   transform-style: preserve-3d;
   transition:
     opacity 420ms ease,
-    filter 520ms ease,
     transform 680ms cubic-bezier(0.2, 0.82, 0.16, 1);
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
+}
+
+.carousel-slide::after {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  content: "";
+  border-radius: var(--radius);
+  opacity: 0;
+  background: rgba(3, 5, 3, 0.36);
+  transition: opacity 420ms ease;
 }
 
 .carousel-slide .project-card {
@@ -782,29 +814,34 @@ button {
   z-index: 4;
   opacity: 1;
   pointer-events: auto;
-  filter: none;
   transform: translate3d(0, 0, 92px) rotateY(0deg) scale(1);
 }
 
 .carousel-slide.is-prev {
   z-index: 2;
   opacity: 0.52;
-  filter: saturate(0.78) brightness(0.68);
   transform: translate3d(-52%, 18px, -150px) rotateY(18deg) scale(0.87);
 }
 
 .carousel-slide.is-next {
   z-index: 2;
   opacity: 0.52;
-  filter: saturate(0.78) brightness(0.68);
   transform: translate3d(52%, 18px, -150px) rotateY(-18deg) scale(0.87);
 }
 
 .carousel-slide.is-hidden {
   z-index: 0;
   opacity: 0;
-  filter: blur(2px) brightness(0.55);
   transform: translate3d(0, 46px, -320px) scale(0.76);
+}
+
+.carousel-slide.is-prev::after,
+.carousel-slide.is-next::after {
+  opacity: 0.34;
+}
+
+.carousel-slide.is-hidden::after {
+  opacity: 0.58;
 }
 
 .carousel-slide.is-prev .project-card,
@@ -887,6 +924,10 @@ button {
 .project-card {
   min-width: 0;
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+}
+
+.carousel-slide .project-card {
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
 }
 
 .project-card > * {
@@ -1069,6 +1110,10 @@ button {
   padding: 20px;
 }
 
+.course-card {
+  contain: layout paint;
+}
+
 .card-icon {
   display: inline-grid;
   place-items: center;
@@ -1087,6 +1132,125 @@ button {
   margin-top: 18px;
   color: var(--muted-strong);
   font-size: 0.85rem;
+}
+
+.certificate-preview {
+  display: grid;
+  width: 100%;
+  gap: 9px;
+  margin-top: 16px;
+  padding: 7px;
+  contain: paint;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 2px);
+  background: rgba(245, 243, 233, 0.035);
+  color: var(--accent);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.certificate-preview:hover,
+.certificate-preview:focus-visible {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+.certificate-preview img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 7px;
+  object-fit: cover;
+  object-position: center;
+  transform: translateZ(0);
+}
+
+.certificate-preview span {
+  padding: 0 3px 2px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.certificate-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.certificate-modal[hidden] {
+  display: none;
+}
+
+.certificate-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 5, 3, 0.82);
+  backdrop-filter: blur(12px);
+}
+
+.certificate-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(980px, 100%);
+  max-height: calc(100svh - 48px);
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+}
+
+.certificate-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 4px 4px 12px;
+}
+
+.certificate-modal-header h3 {
+  margin: 4px 0 0;
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.certificate-modal-close {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(245, 243, 233, 0.05);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.certificate-modal-close:hover,
+.certificate-modal-close:focus-visible {
+  border-color: var(--accent-line);
+  color: var(--accent);
+}
+
+.certificate-modal img {
+  display: block;
+  width: 100%;
+  max-height: calc(100svh - 150px);
+  border-radius: calc(var(--radius) - 4px);
+  object-fit: contain;
+  background: #ffffff;
+}
+
+body.has-modal {
+  overflow: hidden;
 }
 
 .tech-grid {
@@ -1853,6 +2017,24 @@ button {
   .carousel-dot {
     min-width: 38px;
     padding: 0 10px;
+  }
+
+  .certificate-modal {
+    padding: 12px;
+  }
+
+  .certificate-modal-dialog {
+    max-height: calc(100svh - 24px);
+    padding: 10px;
+  }
+
+  .certificate-modal-header {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .certificate-modal img {
+    max-height: calc(100svh - 140px);
   }
 
   .mobile-dock {

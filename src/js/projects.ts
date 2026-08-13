@@ -8,7 +8,7 @@ const renderProjectPreview = (project: Project, className = "project-preview"): 
   if (screenshots.length === 1) {
     return `
       <div class="${className}">
-        <img src="${screenshots[0]}" alt="Vista previa de ${project.title}" loading="lazy" width="1200" height="760" />
+        <img src="${screenshots[0]}" alt="Vista previa de ${project.title}" loading="lazy" decoding="async" width="1200" height="760" />
       </div>
     `;
   }
@@ -24,6 +24,7 @@ const renderProjectPreview = (project: Project, className = "project-preview"): 
               src="${screenshot}"
               alt="Captura ${index + 1} de ${project.title}"
               loading="lazy"
+              decoding="async"
               width="1200"
               height="760"
             />
@@ -335,7 +336,7 @@ export const renderCaseStudy = (projectData: Project[]): void => {
           .map(
             (screenshot) => `
               <figure class="gallery-item reveal spotlight-card">
-                <img src="${screenshot}" alt="Captura editable de ${project.title}" loading="lazy" width="1200" height="760" />
+                <img src="${screenshot}" alt="Captura editable de ${project.title}" loading="lazy" decoding="async" width="1200" height="760" />
               </figure>
             `
           )

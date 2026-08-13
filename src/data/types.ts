@@ -67,6 +67,8 @@ export interface CourseItem {
   duration: string;
   description: string;
   certificateUrl: string | null;
+  certificateImage?: string | null;
+  certificateAlt?: string;
 }
 
 export interface TechnologyCategory {
