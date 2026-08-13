@@ -70,7 +70,7 @@ Conectar el repositorio en Netlify. No hace falta configurar Forms ni funciones.
       perfil.jpeg
       recibido.jpeg
       projects/
-    cv.pdf
+    CV-SantiValenti-ATS.pdf
     og-image.jpg
     favicon.svg
 ```
@@ -107,10 +107,10 @@ La sección "Sobre mí" también usa las fotos configuradas en `aboutImages` den
 Reemplazar:
 
 ```text
-public/cv.pdf
+public/CV-SantiValenti-ATS.pdf
 ```
 
-El botón "Descargar CV" apunta a `/cv.pdf`.
+El botón "Descargar CV" apunta a `/CV-SantiValenti-ATS.pdf`.
 
 ## Agregar proyectos
 

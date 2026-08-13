@@ -13,7 +13,7 @@ export const site: SiteProfile = {
   githubUrl: "https://github.com/DevSantiValenti",
   linkedinUrl: "https://www.linkedin.com/in/santiago-valenti-b683b2373/",
   whatsappUrl: "https://wa.me/543623701036",
-  cvUrl: "/cv.pdf",
+  cvUrl: "/CV-SantiValenti-ATS.pdf",
   profileImage: "/images/perfil.jpeg",
   aboutImages: [
     {
